@@ -203,44 +203,44 @@
                     <div class="col-span-full">
                       <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Learning resource</label>
                       <p class="mt-1 text-sm/6 text-gray-600">Add learning resources for current section.</p>
-              
-                      <ul role="list" class="mt-6 divide-y divide-gray-100 border-t border-gray-200 text-sm/6">
-                        <li class="flex justify-between gap-x-6 py-6">
-                            <a href="javascript:void(0)" class="font-medium text-gray-900 underline" onclick="document.getElementById('resourcePopup1').classList.remove('hidden')">
-                                The best learning resource ever
-                            </a>
-                            <div id="resourcePopup1" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-                                <div class="bg-white rounded-lg p-4">
-                                    <div class="flex justify-end">
-                                        <button onclick="document.getElementById('resourcePopup1').classList.add('hidden')" class="text-sm text-gray-700">Close</button>
-                                    </div>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Tjvpi9ufqEc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                            <button type="button" onclick="this.closest('li').remove()" class="font-semibold text-red-600 hover:text-red-500">Remove</button>
-                        </li>
-                        <li class="flex justify-between gap-x-6 py-6">
-                            <a href="javascript:void(0)" class="font-medium text-gray-900 underline" onclick="document.getElementById('resourcePopup2').classList.remove('hidden')">
-                                The best learning resource ever
-                            </a>
-                            <div id="resourcePopup2" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-                                <div class="bg-white rounded-lg p-4">
-                                    <div class="flex justify-end">
-                                        <button onclick="document.getElementById('resourcePopup2').classList.add('hidden')" class="text-sm text-gray-700">Close</button>
-                                    </div>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Tjvpi9ufqEc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                            <button type="button" onclick="this.closest('li').remove()" class="font-semibold text-red-600 hover:text-red-500">Remove</button>
-                        </li>
-                      </ul>
-              
+        
+                      <ul role="list" id="existingResourceList" class="mt-6 divide-y divide-gray-100 border-t border-gray-200 text-sm/6">
+                          <li class="flex justify-between gap-x-6 py-6">
+                              <a href="javascript:void(0)" class="font-medium text-gray-900 underline" onclick="document.getElementById('resourcePopup1').classList.remove('hidden')">
+                                  The best learning resource ever
+                              </a>
+                              <div id="resourcePopup1" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                                  <div class="bg-white rounded-lg p-4">
+                                      <div class="flex justify-end">
+                                          <button onclick="document.getElementById('resourcePopup1').classList.add('hidden')" class="text-sm text-gray-700">Close</button>
+                                      </div>
+                                      <iframe src="https://sisuloome.e-koolikott.ee/h5p/25325/embed" width="1326" height="1032" frameborder="0" allowfullscreen="allowfullscreen" lang="en" title="Mis number on?"></iframe><script src="https://sisuloome.e-koolikott.ee/modules/contrib/h5p/vendor/h5p/h5p-core/js/h5p-resizer.js" charset="UTF-8"></script>
+                                  </div>
+                              </div>
+                              <button type="button" onclick="this.closest('li').remove()" class="font-semibold text-red-600 hover:text-red-500">Remove</button>
+                          </li>
+                           <li class="flex justify-between gap-x-6 py-6">
+                               <a href="javascript:void(0)" class="font-medium text-gray-900 underline" onclick="document.getElementById('resourcePopup2').classList.remove('hidden')">
+                                   Another amazing resource
+                               </a>
+                               <div id="resourcePopup2" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                                   <div class="bg-white rounded-lg p-4">
+                                      <div class="flex justify-end">
+                                          <button onclick="document.getElementById('resourcePopup2').classList.add('hidden')" class="text-sm text-gray-700">Close</button>
+                                      </div>
+                                      <iframe width="560" height="315" src="https://www.youtube.com/embed/Tjvpi9ufqEc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                   </div>
+                               </div>
+                               <button type="button" onclick="this.closest('li').remove()" class="font-semibold text-red-600 hover:text-red-500">Remove</button>
+                           </li>
+                          </ul>
+        
                       <div class="flex border-t border-gray-100 pt-6">
-                        <button id="openModalBtn" type="button" class="text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500">
-                          <span aria-hidden="true">+</span> Add another resource
+                        <button id="openModalBtn" type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                          <span aria-hidden="true" class="mr-1">+</span> Add another resource
                         </button>
                       </div>
-                    </div>
+                  </div>
           
                     <div class="col-span-full">
                       <label class="block text-sm/6 font-medium text-gray-900">Feedback</label>
@@ -443,7 +443,9 @@
                   </ul>
           
                   <div class="flex border-t border-gray-100 pt-6">
-                    <button type="button" class="text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500"><span aria-hidden="true">+</span> Add another resource</button>
+                    <button id="openModalBtn" type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                      <span aria-hidden="true" class="mr-1">+</span> Add another resource
+                    </button>
                   </div>
                 </div>
   
@@ -464,17 +466,83 @@
   </div>
 
   <!-- Modal for adding new resource -->
-<div id="addResourceModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-  <div class="bg-white rounded-lg p-6 w-full max-w-md">
-    <div class="flex justify-between items-center">
-      <h3 class="text-lg font-bold">Add New Resource</h3>
-      <button id="closeModalBtn" class="text-gray-700 text-2xl">&times;</button>
+  <div id="addResourceModal" class="fixed inset-0 z-10 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start w-full">
+                     <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <div class="flex justify-between items-center pb-4">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                Add Learning Resource
+                            </h3>
+                            <button id="closeModalHeaderBtn" type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                <span class="sr-only">Close</span>
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="mb-4 px-6 -mx-6 sm:px-6 sm:-mx-6 border-t border-gray-200 pt-4">
+                            <label for="resourceSearchInput" class="sr-only">Search resources</label> <input type="search" name="resource_search" id="resourceSearchInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Search resources by title...">
+                        </div>
+                        <div class="max-h-64 overflow-y-auto border-b border-gray-200 -mx-6 sm:-mx-6">
+                            <ul role="listbox" aria-labelledby="modal-title" class="divide-y divide-gray-200" id="resourceList">
+                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="1" role="option" tabindex="0" aria-selected="false">
+                                    <div class="flex items-center space-x-4 min-w-0">
+                                        <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 1">
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Introduction to Tailwind CSS</p>
+                                            <span class="inline-flex mt-1 items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">CSS Framework</span>
+                                        </div>
+                                    </div>
+                                    <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                </li>
+                                 <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="2" role="option" tabindex="0" aria-selected="false">
+                                    <div class="flex items-center space-x-4 min-w-0">
+                                        <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 2">
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Alpine.js Fundamentals...</p>
+                                            <span class="inline-flex mt-1 items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">JavaScript</span>
+                                        </div>
+                                    </div>
+                                    <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                </li>
+                                 <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="3" role="option" tabindex="0" aria-selected="false">
+                                    <div class="flex items-center space-x-4 min-w-0">
+                                        <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 3">
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Advanced State Management</p>
+                                            <span class="inline-flex mt-1 items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">Concepts</span>
+                                        </div>
+                                    </div>
+                                    <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                </li>
+                                </ul>
+                             </div>
+
+                        <div class="mt-6">
+                            <label for="resourceUrlInput" class="block text-sm font-medium text-gray-700">Or add by link:</label>
+                            <div class="mt-1">
+                                <input type="url" name="resource_url" id="resourceUrlInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="https://example.com/resource">
+                            </div>
+                             <p class="mt-1 text-xs text-gray-500">Paste the URL of the learning resource.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button type="button" id="addResourceBtn" class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50" disabled>Add Resource</button>
+                <button type="button" id="cancelModalBtn" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">Cancel</button>
+            </div>
+        </div>
     </div>
-    <div id="modalContent">
-      <!-- Content to be added later -->
-      <p>Modal content placeholder.</p>
-    </div>
-  </div>
 </div>
 
   <script src="js/main.js"></script>
