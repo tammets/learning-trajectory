@@ -42,15 +42,15 @@
       </div>
     </nav>
 
-       <!-- Episode modal -->
-
-       <div id="editEpisodeModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="edit-episode-modal-title" role="dialog" aria-modal="true">
+    <div id="editEpisodeModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="edit-episode-modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <div class="fixed inset-0 bg-gray-500 opacity-75 transition-opacity" aria-hidden="true"></div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full"> <form id="editEpisodeForm"> <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
+                <form id="editEpisodeForm">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start w-full">
-                             <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                            <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
                                 <div class="flex justify-between items-center pb-4 border-b border-gray-200">
                                     <h3 class="text-lg leading-6 font-medium text-gray-900" id="edit-episode-modal-title">
                                         Edit Episode
@@ -62,17 +62,17 @@
                                         </svg>
                                     </button>
                                 </div>
-    
+
                                 <div class="mt-6 space-y-6">
                                     <input type="hidden" id="editingEpisodeId" name="editingEpisodeId">
-    
+
                                     <div>
                                         <label for="editEpisodeTitle" class="block text-sm font-medium text-gray-700">Title</label>
                                         <div class="mt-1">
                                             <input type="text" name="editEpisodeTitle" id="editEpisodeTitle" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="Episode Title">
                                         </div>
                                     </div>
-    
+
                                     <div>
                                         <label for="editEpisodeDescription" class="block text-sm font-medium text-gray-700">Description</label>
                                         <div class="mt-1">
@@ -80,7 +80,7 @@
                                         </div>
                                         <p class="mt-2 text-sm text-gray-500">Brief overview of the episode.</p>
                                     </div>
-    
+
                                     <div>
                                         <label for="editEpisodeKnowbits" class="block text-sm font-medium text-gray-700">Knowbits</label>
                                         <div class="mt-1">
@@ -99,7 +99,7 @@
                                             <p class="mt-2 text-sm text-gray-500">Select relevant knowledge components.</p>
                                         </div>
                                     </div>
-    
+
                                     <div>
                                         <label for="editEpisodeSkillbits" class="block text-sm font-medium text-gray-700">Skillbits</label>
                                         <div class="mt-1">
@@ -114,7 +114,7 @@
                                             <p class="mt-2 text-sm text-gray-500">Select relevant skills.</p>
                                         </div>
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>
@@ -131,9 +131,120 @@
             </div>
         </div>
     </div>
-  
-     <!-- End Episode modal -->
+    <div id="editLearningResourceModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="edit-lr-modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
+                <form id="editLearningResourceForm">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start w-full">
+                            <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                                <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="edit-lr-modal-title">
+                                        Edit Learning Resource
+                                    </h3>
+                                    <button id="closeEditLearningResourceModalBtn" type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                        <span class="sr-only">Close</span>
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
 
+                                <div class="mt-6 space-y-6">
+                                    <input type="hidden" id="editingLearningResourceId" name="editingLearningResourceId">
+
+                                    <div>
+                                        <label for="lrTitleInput" class="block text-sm font-medium text-gray-700">Title</label>
+                                        <div class="mt-1">
+                                            <input type="text" name="lrTitleInput" id="lrTitleInput" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="Learning Resource Title">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="lrDescriptionInput" class="block text-sm font-medium text-gray-700">Description</label>
+                                        <div class="mt-1">
+                                            <textarea name="lrDescriptionInput" id="lrDescriptionInput" rows="3" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="Learning Resource Description"></textarea>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">Brief overview of the learning resource.</p>
+                                    </div>
+
+                                    <div>
+                                        <label for="lrTypeSelect" class="block text-sm font-medium text-gray-700">Type</label>
+                                        <div class="mt-1 grid grid-cols-1">
+                                            <select id="lrTypeSelect" name="lrTypeSelect" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                                <option>Individual Work</option>
+                                                <option>Pair Work</option>
+                                                <option>Group Work</option>
+                                                <option>Whole Class Discussion</option>
+                                                <option>Presentation</option>
+                                                <option>Experiment</option>
+                                                <option>Reading</option>
+                                                <option>Video</option>
+                                            </select>
+                                            <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                     <div>
+                                        <label for="lrLocationSelect" class="block text-sm font-medium text-gray-700">Location</label>
+                                        <div class="mt-1 grid grid-cols-1">
+                                            <select id="lrLocationSelect" name="lrLocationSelect" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                                <option>Classroom</option>
+                                                <option>School Library</option>
+                                                <option>Computer Lab</option>
+                                                <option>Outdoors</option>
+                                                <option>Home</option>
+                                                <option>Other</option>
+                                            </select>
+                                            <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="lrTimeInput" class="block text-sm font-medium text-gray-700">Approximate Time</label>
+                                        <div class="mt-1">
+                                            <input type="text" name="lrTimeInput" id="lrTimeInput" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="e.g., 45 min, 1 hour">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="lrDifficultySelect" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
+                                        <div class="mt-1 grid grid-cols-1">
+                                             <select id="lrDifficultySelect" name="lrDifficultySelect" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                                <option>1 (Very Easy)</option>
+                                                <option>2 (Easy)</option>
+                                                <option>3 (Medium)</option>
+                                                <option>4 (Hard)</option>
+                                                <option>5 (Very Hard)</option>
+                                            </select>
+                                            <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button type="submit" id="saveLearningResourceChangesBtn" class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Save Changes
+                        </button>
+                        <button type="button" id="cancelEditLearningResourceBtn" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <header class="bg-white shadow-xs">
       <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <h1 class="text-lg/6 font-semibold text-gray-900">Add new Instructional Trajectory</h1>
@@ -154,7 +265,7 @@
                 </h2>
                 <p class="mt-1 text-sm/6 text-gray-600">General information about the trajectory.</p>
               </div>
-          
+
               <form class="bg-white ring-1 shadow-xs ring-gray-900/5 sm:rounded-xl md:col-span-2">
                 <div class="px-4 py-6 sm:p-8">
                   <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -166,7 +277,7 @@
                         </div>
                       </div>
                     </div>
-          
+
                     <div class="col-span-full">
                       <label for="about" class="block text-sm/6 font-medium text-gray-900">Description</label>
                       <div class="mt-2">
@@ -174,17 +285,17 @@
                       </div>
                       <p class="mt-3 text-sm/6 text-gray-600">Brief overview of the trajectory, highlighting key milestones and a path forward.</p>
                     </div>
-          
+
                     <div class="sm:col-span-3">
                         <label for="school-level" class="block text-sm/6 font-medium text-gray-900">School level</label>
                         <div class="mt-2 grid grid-cols-1">
-                          <select id="school-level" name="school-level" name="school-level" autocomplete="school-level" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                          <select id="school-level" name="school-level" autocomplete="school-level" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                             <option>Primary School</option>
                             <option>Lower Secondary School</option>
                             <option>Upper Secondary School</option>
                             <option>Gymnasium</option>
                           </select>
-                          <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                           </svg>
                         </div>
@@ -202,7 +313,7 @@
                             <option>Geography</option>
                             <option>Art</option>
                           </select>
-                          <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                           </svg>
                         </div>
@@ -216,7 +327,7 @@
                             <option>Teema 2</option>
                             <option>Teema 3</option>
                           </select>
-                          <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                           </svg>
                         </div>
@@ -230,7 +341,7 @@
                           <option>Alamteema 2</option>
                           <option>Alamteema 3</option>
                         </select>
-                        <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                         </svg>
                       </div>
@@ -247,23 +358,24 @@
                         </select>
                       </div>
                     </div>
-          
+
                     </div>
                   </div>
                 </div>
-                
+
               </form>
             </div>
-        </div><div class="mt-6 border-t border-gray-900/10 pt-10">
+        </div>
+
+        <div class="mt-6 border-t border-gray-900/10 pt-10">
             <h2 class="text-xl font-semibold leading-7 text-gray-900">Trajectory Episodes</h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">Build the structure of your instructional trajectory by adding episodes and learning activities.</p>
 
             <div id="episodesContainer" class="mt-8 space-y-8">
-
                 <div class="bg-white ring-1 shadow-xs ring-gray-900/5 sm:rounded-xl p-6 episode-card border border-gray-200" data-episode-id="example1">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="text-lg font-semibold text-indigo-700">Episode 1: Example Introduction</h3> 
+                            <h3 class="text-lg font-semibold text-indigo-700">Episode 1: Example Introduction</h3>
                             <p class="mt-1 text-sm text-gray-600">Description for the first example episode goes here.</p>
                             <div class="mt-2 space-y-1">
                               <div class="knowbits-display text-xs text-gray-500 italic"></div>
@@ -279,17 +391,16 @@
                     <div class="mt-6 border-t border-gray-200 pt-6">
                         <h4 class="text-base font-semibold text-gray-800 mb-4">Learning Activities</h4>
                         <ul class="space-y-4 learning-activities-list">
-
                             <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md activity-item border border-gray-100" data-activity-id="activityExample1">
                                 <div class="flex-grow pr-4">
-                                    <p class="text-sm font-medium text-gray-800">Activity: Initial Brainstorm</p>
-                                    <p class="text-xs text-gray-500">Type: Whole Class | Location: School | Time: 15min | Difficulty: 2</p>
+                                    <p class="text-sm font-medium text-gray-800 activity-title">Activity: Initial Brainstorm</p>
+                                    <p class="text-xs text-gray-500 activity-details">Type: <span class="activity-type">Whole Class</span> | Location: <span class="activity-location">School</span> | Time: <span class="activity-time">15min</span> | Difficulty: <span class="activity-difficulty">2</span></p>
                                      <div class="mt-2 text-xs">
                                          <span class="font-medium">Resources:</span>
-                                         <ul class="list-disc pl-5 mt-1">
+                                         <ul class="list-disc pl-5 mt-1 activity-resources-list">
                                              <li>Resource Title Example 1</li>
                                          </ul>
-                                         <button id="openModalBtn_activityExample1" type="button" class="mt-1 text-xs font-semibold text-indigo-600 hover:text-indigo-500 openModalBtn">
+                                         <button type="button" class="mt-1 text-xs font-semibold text-indigo-600 hover:text-indigo-500 openModalBtn">
                                             <span aria-hidden="true">+</span> Add Resource
                                          </button>
                                      </div>
@@ -300,31 +411,35 @@
                                 </div>
                             </li>
                             </ul>
-
-                         <button type="button" class="mt-4 inline-flex items-center rounded-md bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 add-activity-btn">
+                        <button type="button" class="mt-4 inline-flex items-center rounded-md bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 add-activity-btn">
                             <svg class="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" /></svg>
                             Add Learning Activity
                         </button>
                     </div>
                 </div>
-                </div><div class="mt-8 pt-8 border-t border-gray-200">
+                 </div>
+
+            <div class="mt-8 pt-8 border-t border-gray-200">
                  <button id="addNewEpisodeBtn" type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     <svg class="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clip-rule="evenodd" /></svg>
                     Add New Episode
                 </button>
             </div>
 
-        </div> <div class="mt-10 flex items-center justify-end gap-x-6 border-t border-gray-900/10 pt-8">
+        </div>
+
+        <div class="mt-10 flex items-center justify-end gap-x-6 border-t border-gray-900/10 pt-8">
           <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
           <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save Trajectory</button>
         </div>
 
-      </div> 
+      </div>
     </main>
-  </div> 
+  </div>
+
   <div id="addResourceModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <div class="fixed inset-0 bg-gray-500 opacity-75 transition-opacity" aria-hidden="true"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -339,17 +454,21 @@
                         </div>
                         <div class="mb-4 px-6 -mx-6 sm:px-6 sm:-mx-6 border-t border-gray-200 pt-4">
                             <label for="resourceSearchInput" class="sr-only">Search resources</label>
-                            <input type="search" name="resource_search" id="resourceSearchInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Search resources by title...">
+                            <input type="search" name="resource_search" id="resourceSearchInput" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="Search resources by title...">
                         </div>
                         <div class="max-h-64 overflow-y-auto border-b border-gray-200 -mx-6 sm:-mx-6">
                             <ul role="listbox" aria-labelledby="modal-title" class="divide-y divide-gray-200" id="resourceList">
-                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="1" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 1"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Introduction to Tailwind CSS</p> <span class="inline-flex mt-1 items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">CSS Framework</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
-                                 <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="2" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 2"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Alpine.js Fundamentals...</p> <span class="inline-flex mt-1 items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">JavaScript</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
+                              <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="2" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 2"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Murrud ja võrrandid</p> <span class="inline-flex mt-1 items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">Matemaatika</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
+                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="2" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 2"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Mingi kuradi teoreem</p> <span class="inline-flex mt-1 items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">Matemaatika</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
+                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="3" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 3"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Eesti keele grammatika</p> <span class="inline-flex mt-1 items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">Eesti keel</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
+                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="4" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 4"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Loodusõpetuse avastused</p> <span class="inline-flex mt-1 items-center rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800">Loodusõpetus</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
+                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="5" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 5"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Ajaloo põnev maailm</p> <span class="inline-flex mt-1 items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">Ajalugu</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
+                                <li class="flex items-center justify-between py-3 px-6 hover:bg-gray-50 cursor-pointer resource-item" data-resource-id="6" role="option" tabindex="0" aria-selected="false"> <div class="flex items-center space-x-4 min-w-0"> <img class="h-12 w-12 rounded-md object-cover bg-gray-200 flex-shrink-0" src="assets/h5p.png" alt="Thumbnail for Resource 6"> <div class="min-w-0 flex-1"> <p class="text-sm font-medium text-gray-900 truncate">Geograafia saladused</p> <span class="inline-flex mt-1 items-center rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-medium text-teal-800">Geograafia</span> </div> </div> <svg class="h-5 w-5 text-indigo-600 hidden selection-indicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg> </li>
                             </ul>
                         </div>
                         <div class="mt-6">
                             <label for="resourceUrlInput" class="block text-sm font-medium text-gray-700">Or add by link:</label>
-                            <div class="mt-1"> <input type="url" name="resource_url" id="resourceUrlInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="https://example.com/resource"> </div>
+                            <div class="mt-1"> <input type="url" name="resource_url" id="resourceUrlInput" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="https://sisuloome.e-koolikott.ee/node/25326"> </div>
                             <p class="mt-1 text-xs text-gray-500">Paste the URL of the learning resource.</p>
                         </div>
                     </div>
@@ -361,10 +480,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
-
 </body>
 </html>

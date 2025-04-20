@@ -5,32 +5,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const addResourceModal = document.getElementById('addResourceModal');
     const closeModalHeaderBtn = document.getElementById('closeModalHeaderBtn');
     const cancelModalBtn = document.getElementById('cancelModalBtn');
-    const resourceListModal = document.getElementById('resourceList'); // List inside the modal
-    const addResourceBtn = document.getElementById('addResourceBtn'); // Button in modal footer
+    const resourceListModalEl = document.getElementById('resourceList'); // Renamed to avoid conflict
+    const addResourceBtnModal = document.getElementById('addResourceBtn'); // Renamed to avoid conflict
     const resourceUrlInput = document.getElementById('resourceUrlInput');
     const resourceSearchInput = document.getElementById('resourceSearchInput');
 
     // Edit Episode Modal Elements
-    const editEpisodeModal = document.getElementById('editEpisodeModal'); // Assumes this exists in HTML
-    const editEpisodeForm = document.getElementById('editEpisodeForm'); // Assumes this exists in HTML
-    const editEpisodeTitleInput = document.getElementById('editEpisodeTitle'); // Assumes this exists in HTML
-    const editEpisodeDescriptionInput = document.getElementById('editEpisodeDescription'); // Assumes this exists in HTML
-    const editEpisodeKnowbitsSelect = document.getElementById('editEpisodeKnowbits'); // Assumes this exists in HTML
-    const editEpisodeSkillbitsSelect = document.getElementById('editEpisodeSkillbits'); // Assumes this exists in HTML
-    const editingEpisodeIdInput = document.getElementById('editingEpisodeId'); // Assumes this exists in HTML
-    const saveEpisodeChangesBtn = document.getElementById('saveEpisodeChangesBtn'); // Assumes this exists in HTML
-    const cancelEditEpisodeBtn = document.getElementById('cancelEditEpisodeBtn'); // Assumes this exists in HTML
-    const closeEditEpisodeModalBtn = document.getElementById('closeEditEpisodeModalBtn'); // Assumes this exists in HTML
+    const editEpisodeModal = document.getElementById('editEpisodeModal');
+    const editEpisodeForm = document.getElementById('editEpisodeForm');
+    const editEpisodeTitleInput = document.getElementById('editEpisodeTitle');
+    const editEpisodeDescriptionInput = document.getElementById('editEpisodeDescription');
+    const editEpisodeKnowbitsSelect = document.getElementById('editEpisodeKnowbits');
+    const editEpisodeSkillbitsSelect = document.getElementById('editEpisodeSkillbits');
+    const editingEpisodeIdInput = document.getElementById('editingEpisodeId');
+    const saveEpisodeChangesBtn = document.getElementById('saveEpisodeChangesBtn');
+    const cancelEditEpisodeBtn = document.getElementById('cancelEditEpisodeBtn');
+    const closeEditEpisodeModalBtn = document.getElementById('closeEditEpisodeModalBtn');
+
+    // Edit Learning Resource Modal Elements (NEW)
+    const editLearningResourceModal = document.getElementById('editLearningResourceModal');
+    const editLearningResourceForm = document.getElementById('editLearningResourceForm');
+    const lrTitleInput = document.getElementById('lrTitleInput');
+    const lrDescriptionInput = document.getElementById('lrDescriptionInput');
+    const lrTypeSelect = document.getElementById('lrTypeSelect');
+    const lrLocationSelect = document.getElementById('lrLocationSelect');
+    const lrTimeInput = document.getElementById('lrTimeInput');
+    const lrDifficultySelect = document.getElementById('lrDifficultySelect');
+    const editingLearningResourceIdInput = document.getElementById('editingLearningResourceId');
+    const saveLearningResourceChangesBtn = document.getElementById('saveLearningResourceChangesBtn');
+    const cancelEditLearningResourceBtn = document.getElementById('cancelEditLearningResourceBtn');
+    const closeEditLearningResourceModalBtn = document.getElementById('closeEditLearningResourceModalBtn');
 
     // Trajectory Page Elements
     const episodesContainer = document.getElementById('episodesContainer');
     const addNewEpisodeBtn = document.getElementById('addNewEpisodeBtn');
 
     // --- State ---
-    // Modal State
+    // Add Resource Modal State
     let selectedResourceId = null;
     let resourceUrlValue = '';
-    let currentTargetActivityElement = null; // Stores which activity triggered the Add Resource modal
+    let currentTargetActivityElementForResourceAdd = null; // Stores which activity triggered the Add Resource modal
 
     // Counters for unique IDs
     let episodeCounter = (episodesContainer?.querySelectorAll('.episode-card').length || 0) + 1;
@@ -42,17 +56,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateAddButtonState() {
-        if (!addResourceBtn) return;
+        if (!addResourceBtnModal) return;
         const isListSelected = selectedResourceId !== null;
         const isUrlEntered = isValidUrl(resourceUrlInput?.value || ''); // Add null check
-        addResourceBtn.disabled = !(isListSelected || isUrlEntered);
+        addResourceBtnModal.disabled = !(isListSelected || isUrlEntered);
     }
 
     // --- Filtering Function (Add Resource Modal) ---
     function filterResourceList() {
-        if (!resourceSearchInput || !resourceListModal) return;
+        if (!resourceSearchInput || !resourceListModalEl) return;
         const searchTerm = resourceSearchInput.value.toLowerCase().trim();
-        const listItems = resourceListModal.querySelectorAll('.resource-item');
+        const listItems = resourceListModalEl.querySelectorAll('.resource-item');
         listItems.forEach(item => {
             const titleElement = item.querySelector('.min-w-0 p');
             const title = titleElement ? titleElement.textContent.toLowerCase() : '';
@@ -61,27 +75,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Add Resource Modal Visibility ---
-    function openModal(triggeringActivityElement) {
+    function openAddResourceModal(triggeringActivityElement) {
         if (!addResourceModal) return;
-        currentTargetActivityElement = triggeringActivityElement;
-        console.log("Opening Add Resource modal for activity:", currentTargetActivityElement?.dataset.activityId);
-        resetModalInputsAndSelection();
+        currentTargetActivityElementForResourceAdd = triggeringActivityElement;
+        console.log("Opening Add Resource modal for activity:", currentTargetActivityElementForResourceAdd?.dataset.activityId);
+        resetAddResourceModalInputsAndSelection();
         addResourceModal.classList.remove('hidden');
         if (resourceSearchInput) resourceSearchInput.focus();
         else if (cancelModalBtn) cancelModalBtn.focus();
     }
 
-    function closeModal() {
+    function closeAddResourceModal() {
         if (!addResourceModal) return;
         addResourceModal.classList.add('hidden');
-        resetModalInputsAndSelection();
-        currentTargetActivityElement = null;
+        resetAddResourceModalInputsAndSelection();
+        currentTargetActivityElementForResourceAdd = null;
     }
 
     // --- Add Resource Modal Input Handling ---
-    function resetModalInputsAndSelection() {
-        if (resourceListModal) {
-            const currentlySelected = resourceListModal.querySelector('.resource-item[aria-selected="true"]');
+    function resetAddResourceModalInputsAndSelection() {
+        if (resourceListModalEl) {
+            const currentlySelected = resourceListModalEl.querySelector('.resource-item[aria-selected="true"]');
             if (currentlySelected) {
                 currentlySelected.classList.remove('bg-indigo-50');
                 const indicator = currentlySelected.querySelector('.selection-indicator');
@@ -104,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
            resourceUrlInput.value = '';
            resourceUrlValue = '';
        }
-       const previouslySelected = resourceListModal.querySelector('.resource-item[aria-selected="true"]');
+       const previouslySelected = resourceListModalEl.querySelector('.resource-item[aria-selected="true"]');
        if (previouslySelected && previouslySelected !== listItem) {
           previouslySelected.classList.remove('bg-indigo-50');
           const prevIndicator = previouslySelected.querySelector('.selection-indicator');
@@ -122,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleUrlInputChange() {
         if (!resourceUrlInput) return; // Added null check
         resourceUrlValue = resourceUrlInput.value.trim();
-        if (resourceUrlValue.length > 0 && selectedResourceId !== null) {
-             const previouslySelected = resourceListModal.querySelector('.resource-item[aria-selected="true"]');
+        if (resourceUrlValue.length > 0 && selectedResourceId !== null && resourceListModalEl) { // Added null check for resourceListModalEl
+             const previouslySelected = resourceListModalEl.querySelector('.resource-item[aria-selected="true"]');
              if (previouslySelected) {
                 previouslySelected.classList.remove('bg-indigo-50');
                  const prevIndicator = previouslySelected.querySelector('.selection-indicator');
@@ -137,37 +151,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Function to add the selected resource to the correct activity's list ---
     function addResourceToActivityList(title) {
-        if (!currentTargetActivityElement) {
+        if (!currentTargetActivityElementForResourceAdd) {
             console.error("Cannot add resource: Target activity element not set.");
             return;
         }
-        let resourceListElement = currentTargetActivityElement.querySelector('.mt-2 ul.list-disc'); // More specific selector
+        // Updated selector to match the new HTML structure
+        let resourceListElement = currentTargetActivityElementForResourceAdd.querySelector('.activity-resources-list');
         if (!resourceListElement) {
-             console.warn("Could not find the resource list UL within the target activity:", currentTargetActivityElement.dataset.activityId, ". Creating it.");
-             const resourceDiv = currentTargetActivityElement.querySelector('.mt-2'); // Find the div containing resources area
+             console.warn("Could not find the resource list UL (.activity-resources-list) within the target activity:", currentTargetActivityElementForResourceAdd.dataset.activityId, ". Creating it.");
+             const resourceDiv = currentTargetActivityElementForResourceAdd.querySelector('.mt-2.text-xs'); // Find the div containing resources area
              const addButton = resourceDiv ? resourceDiv.querySelector('.openModalBtn') : null; // Find the add button
              if(resourceDiv && addButton) {
                  const newUl = document.createElement('ul');
-                 newUl.className = 'list-disc pl-5 mt-1';
+                 // Adjusted class names to match the new structure
+                 newUl.className = 'list-disc pl-5 mt-1 activity-resources-list';
                  resourceDiv.insertBefore(newUl, addButton); // Insert the new UL before the button
                  resourceListElement = newUl;
              } else {
-                 console.error("Could not find appropriate place to insert resource list UL in activity:", currentTargetActivityElement.dataset.activityId)
+                 console.error("Could not find appropriate place to insert resource list UL in activity:", currentTargetActivityElementForResourceAdd.dataset.activityId)
                  return; // Can't find where to put the list
              }
         }
         const newLi = document.createElement('li');
         newLi.textContent = title;
         resourceListElement.appendChild(newLi);
-        console.log(`Added resource "${title}" to activity ${currentTargetActivityElement.dataset.activityId}`);
+        console.log(`Added resource "${title}" to activity ${currentTargetActivityElementForResourceAdd.dataset.activityId}`);
     }
 
     // --- Edit Episode Modal Visibility & Handling ---
     function openEditEpisodeModal(episodeCardElement) {
-      // console.log("Inside openEditEpisodeModal function."); // Kept for debugging if needed
-      // console.log("editEpisodeModal variable:", editEpisodeModal); // Kept for debugging if needed
         if (!editEpisodeModal || !episodeCardElement) {
-             console.error("Edit modal (#editEpisodeModal) or episode card element not found!");
+             console.error("Edit episode modal (#editEpisodeModal) or episode card element not found!");
              return;
         }
         const episodeId = episodeCardElement.dataset.episodeId;
@@ -177,42 +191,40 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentDescription = currentDescriptionElement ? currentDescriptionElement.textContent.trim() : '';
         // TODO: Retrieve saved knowbits/skillbits based on episodeId and set selected options
         // const savedKnowbits = episodeCardElement.dataset.knowbits ? JSON.parse(episodeCardElement.dataset.knowbits) : [];
-        // const savedSkillbits = episodeCardElement.dataset.skillbits ? JSON.parse(episodeCardElement.dataset.skillbits) : []; // TODO: uncomment when needed
+        // const savedSkillbits = episodeCardElement.dataset.skillbits ? JSON.parse(episodeCardElement.dataset.skillbits) : [];
 
         editingEpisodeIdInput.value = episodeId;
-        editEpisodeTitleInput.value = currentTitle; 
+        editEpisodeTitleInput.value = currentTitle;
         editEpisodeDescriptionInput.value = currentDescription;
 
         // Clear previous selections and select saved ones (example)
-        if(editEpisodeKnowbitsSelect) { // Add null check
+        if(editEpisodeKnowbitsSelect) {
             Array.from(editEpisodeKnowbitsSelect.options).forEach(option => {
                 // option.selected = savedKnowbits.includes(option.value);
                  option.selected = false; // Resetting for now
-            }); 
+            });
         }
-         if(editEpisodeSkillbitsSelect) { // Add null check
+         if(editEpisodeSkillbitsSelect) {
             Array.from(editEpisodeSkillbitsSelect.options).forEach(option => {
                 // option.selected = savedSkillbits.includes(option.value);
                 option.selected = false; // Resetting for now
             });
-         } 
-
+         }
 
         editEpisodeModal.classList.remove('hidden');
-        // console.log("Attempted to remove 'hidden' class from edit modal."); // Kept for debugging if needed
-        if(editEpisodeTitleInput) editEpisodeTitleInput.focus(); // Add null check
+        if(editEpisodeTitleInput) editEpisodeTitleInput.focus();
     }
 
     function closeEditEpisodeModal() {
         if (!editEpisodeModal) return;
         editEpisodeModal.classList.add('hidden');
         if (editEpisodeForm) editEpisodeForm.reset();
-        if(editingEpisodeIdInput) editingEpisodeIdInput.value = ''; // Add null check
+        if(editingEpisodeIdInput) editingEpisodeIdInput.value = '';
     }
 
     function handleSaveEpisodeChanges(event) {
         event.preventDefault();
-        if (!editEpisodeForm || !episodesContainer || !editingEpisodeIdInput || !editEpisodeTitleInput || !editEpisodeDescriptionInput || !editEpisodeKnowbitsSelect || !editEpisodeSkillbitsSelect) { // Added null checks
+        if (!editEpisodeForm || !episodesContainer || !editingEpisodeIdInput || !editEpisodeTitleInput || !editEpisodeDescriptionInput || !editEpisodeKnowbitsSelect || !editEpisodeSkillbitsSelect) {
              console.error("One or more elements needed for saving episode changes not found.");
              return;
         }
@@ -254,8 +266,118 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.warn("Skillbits display element not found for episode:", episodeId);
         }
-        
+
+        // Store updated knowbits/skillbits on the element's dataset (optional but good practice)
+        // episodeCard.dataset.knowbits = JSON.stringify(selectedKnowbits);
+        // episodeCard.dataset.skillbits = JSON.stringify(selectedSkillbits);
+
         closeEditEpisodeModal();
+    }
+
+    // --- Edit Learning Resource Modal Visibility & Handling (NEW) ---
+    function openEditLearningResourceModal(activityElement) {
+        if (!editLearningResourceModal || !activityElement) {
+             console.error("Edit Learning Resource modal (#editLearningResourceModal) or activity element not found!");
+             return;
+        }
+        const activityId = activityElement.dataset.activityId;
+
+        // Retrieve current values from the activity element
+        const currentTitleElement = activityElement.querySelector('.activity-title');
+        const currentDescriptionElement = activityElement.querySelector('.activity-description'); // Assuming you add this class or similar
+        const currentTypeElement = activityElement.querySelector('.activity-type');
+        const currentLocationElement = activityElement.querySelector('.activity-location');
+        const currentTimeElement = activityElement.querySelector('.activity-time');
+        const currentDifficultyElement = activityElement.querySelector('.activity-difficulty');
+
+        const currentTitle = currentTitleElement ? currentTitleElement.textContent.trim() : 'New Learning Activity';
+        const currentDescription = currentDescriptionElement ? currentDescriptionElement.textContent.trim() : ''; // Default if description P element doesn't exist
+        const currentType = currentTypeElement ? currentTypeElement.textContent.trim() : 'Individual Work'; // Default
+        const currentLocation = currentLocationElement ? currentLocationElement.textContent.trim() : 'Classroom'; // Default
+        const currentTime = currentTimeElement ? currentTimeElement.textContent.trim() : '?'; // Default
+        const currentDifficulty = currentDifficultyElement ? currentDifficultyElement.textContent.trim() : '3'; // Default (matching option value)
+
+        // Populate modal fields
+        editingLearningResourceIdInput.value = activityId;
+        lrTitleInput.value = currentTitle;
+        lrDescriptionInput.value = currentDescription;
+        lrTypeSelect.value = currentType; // Match the text content to the option value/text
+        lrLocationSelect.value = currentLocation; // Match the text content to the option value/text
+        lrTimeInput.value = currentTime === '?' ? '' : currentTime; // Don't show '?' in input
+        lrDifficultySelect.value = currentDifficulty.match(/\d+/)?.[0] || '3'; // Extract number or default
+
+        editLearningResourceModal.classList.remove('hidden');
+        if(lrTitleInput) lrTitleInput.focus();
+    }
+
+    function closeEditLearningResourceModal() {
+        if (!editLearningResourceModal) return;
+        editLearningResourceModal.classList.add('hidden');
+        if (editLearningResourceForm) editLearningResourceForm.reset();
+        if(editingLearningResourceIdInput) editingLearningResourceIdInput.value = '';
+    }
+
+     function handleSaveLearningResourceChanges(event) {
+        event.preventDefault();
+        if (!editLearningResourceForm || !episodesContainer || !editingLearningResourceIdInput || !lrTitleInput || !lrDescriptionInput || !lrTypeSelect || !lrLocationSelect || !lrTimeInput || !lrDifficultySelect) {
+             console.error("One or more elements needed for saving learning resource changes not found.");
+             return;
+        }
+        const activityId = editingLearningResourceIdInput.value;
+        const activityElement = episodesContainer.querySelector(`.activity-item[data-activity-id="${activityId}"]`);
+
+        if (!activityElement) {
+            console.error("Could not find activity item to update for ID:", activityId);
+            closeEditLearningResourceModal();
+            return;
+        }
+
+        const newTitle = lrTitleInput.value.trim() || 'New Learning Activity';
+        const newDescription = lrDescriptionInput.value.trim(); // Keep description field if needed
+        const newType = lrTypeSelect.value;
+        const newLocation = lrLocationSelect.value;
+        const newTime = lrTimeInput.value.trim() || '?';
+        const selectedDifficultyOption = lrDifficultySelect.options[lrDifficultySelect.selectedIndex];
+        const newDifficultyText = selectedDifficultyOption ? selectedDifficultyOption.textContent : '?'; // Get full text e.g., "3 (Medium)"
+        const newDifficultyValue = selectedDifficultyOption ? selectedDifficultyOption.value : '?'; // Get value e.g., "3"
+
+        console.log(`Saving changes for Activity ${activityId}: Title: ${newTitle}, Type: ${newType}, Loc: ${newLocation}, Time: ${newTime}, Diff: ${newDifficultyValue}`);
+
+        // Update the Activity Item Display
+        const titleElement = activityElement.querySelector('.activity-title');
+        const detailsElement = activityElement.querySelector('.activity-details');
+        // Optional: Add/Update a description element if you want to display it directly
+        // const descriptionElement = activityElement.querySelector('.activity-description');
+        // if (descriptionElement) descriptionElement.textContent = newDescription;
+
+        if (titleElement) titleElement.textContent = newTitle;
+
+        // Update the details string using the new values
+        if (detailsElement) {
+             // Update individual spans if they exist
+            const typeSpan = detailsElement.querySelector('.activity-type');
+            const locationSpan = detailsElement.querySelector('.activity-location');
+            const timeSpan = detailsElement.querySelector('.activity-time');
+            const difficultySpan = detailsElement.querySelector('.activity-difficulty');
+
+            if (typeSpan) typeSpan.textContent = newType;
+            if (locationSpan) locationSpan.textContent = newLocation;
+            if (timeSpan) timeSpan.textContent = newTime;
+            if (difficultySpan) difficultySpan.textContent = newDifficultyValue; // Just show the number value
+
+            // Or rebuild the whole string (simpler if spans don't exist)
+            // detailsElement.innerHTML = `Type: <span class="activity-type">${newType}</span> | Location: <span class="activity-location">${newLocation}</span> | Time: <span class="activity-time">${newTime}</span> | Difficulty: <span class="activity-difficulty">${newDifficultyValue}</span>`;
+        }
+
+        // Store updated values in data attributes (optional, but good practice)
+        activityElement.dataset.title = newTitle;
+        activityElement.dataset.type = newType;
+        activityElement.dataset.location = newLocation;
+        activityElement.dataset.time = newTime;
+        activityElement.dataset.difficulty = newDifficultyValue;
+        // activityElement.dataset.description = newDescription;
+
+        closeEditLearningResourceModal();
     }
 
     // --- Trajectory Structure Creation Functions ---
@@ -264,14 +386,21 @@ document.addEventListener('DOMContentLoaded', function() {
         activityLi.className = 'flex justify-between items-center p-3 bg-gray-50 rounded-md activity-item border border-gray-100';
         activityLi.dataset.activityId = newActivityId;
         activityLi.dataset.parentEpisodeId = episodeId;
+        // Add initial data attributes for new activities
+        activityLi.dataset.title = 'New Learning Activity';
+        activityLi.dataset.type = 'Individual Work';
+        activityLi.dataset.location = 'Classroom';
+        activityLi.dataset.time = '?';
+        activityLi.dataset.difficulty = '3';
+        activityLi.dataset.description = '';
 
         activityLi.innerHTML = `
             <div class="flex-grow pr-4">
-                <p class="text-sm font-medium text-gray-800">New Learning Activity</p>
-                <p class="text-xs text-gray-500">Type: Individual | Location: School | Time: ? | Difficulty: ?</p>
-                <div class="mt-2 text-xs">
+                <p class="text-sm font-medium text-gray-800 activity-title">New Learning Activity</p>
+                <p class="text-xs text-gray-500 activity-details">Type: <span class="activity-type">Individual Work</span> | Location: <span class="activity-location">Classroom</span> | Time: <span class="activity-time">?</span> | Difficulty: <span class="activity-difficulty">3</span></p>
+                 <div class="mt-2 text-xs">
                     <span class="font-medium">Resources:</span>
-                    <ul class="list-disc pl-5 mt-1"></ul>
+                    <ul class="list-disc pl-5 mt-1 activity-resources-list"></ul>
                     <button type="button" class="mt-1 text-xs font-semibold text-indigo-600 hover:text-indigo-500 openModalBtn">
                        <span aria-hidden="true">+</span> Add Resource
                     </button>
@@ -292,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize data attributes for knowbits/skillbits
         episodeDiv.dataset.knowbits = '[]';
         episodeDiv.dataset.skillbits = '[]';
-        
+
         episodeDiv.innerHTML = `
             <div class="flex justify-between items-start mb-4">
             <div>
@@ -350,20 +479,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handleEditEpisode(buttonElement) {
-      console.log("Edit button clicked!"); // Kept for debugging
         const episodeCard = buttonElement.closest('.episode-card');
-        console.log("Found episode card element:", episodeCard); // Kept for debugging
         if (episodeCard) {
-          console.log("Calling openEditEpisodeModal for:", episodeCard.dataset.episodeId); // Kept for debugging
           openEditEpisodeModal(episodeCard);
-      }else console.error("Could not find parent episode card for edit button.");
+        } else console.error("Could not find parent episode card for edit button.");
     }
 
-    function handleEditActivity(buttonElement) {
+    function handleEditActivity(buttonElement) { // UPDATED to open the new modal
         const activityItem = buttonElement.closest('.activity-item');
-        const activityId = activityItem?.dataset.activityId || 'unknown';
-        console.log("--- Edit Activity Clicked --- ID:", activityId);
-        alert(`Editing Activity: ${activityId} (Not implemented yet)`);
+        if (activityItem) {
+            openEditLearningResourceModal(activityItem);
+        } else {
+            console.error("Could not find parent activity item for edit button.");
+        }
     }
 
     // --- Main Event Listeners Setup ---
@@ -378,30 +506,29 @@ document.addEventListener('DOMContentLoaded', function() {
             const removeEpisodeBtn = target.closest('.remove-episode-btn');
             const removeActivityBtn = target.closest('.remove-activity-btn');
             const editEpisodeBtn = target.closest('.edit-episode-btn');
-            const editActivityBtn = target.closest('.edit-activity-btn');
+            const editActivityBtn = target.closest('.edit-activity-btn'); // Now targets the button for the new modal
             const openModalBtn = target.closest('.openModalBtn'); // Add Resource button in activity
 
             if (addActivityBtn) handleAddActivity(addActivityBtn);
             else if (removeEpisodeBtn) handleRemoveEpisode(removeEpisodeBtn);
             else if (removeActivityBtn) handleRemoveActivity(removeActivityBtn);
             else if (editEpisodeBtn) handleEditEpisode(editEpisodeBtn);
-            else if (editActivityBtn) handleEditActivity(editActivityBtn);
+            else if (editActivityBtn) handleEditActivity(editActivityBtn); // Call the correct handler
             else if (openModalBtn) {
                  const activityElement = target.closest('.activity-item');
-                 if(activityElement) openModal(activityElement);
+                 if(activityElement) openAddResourceModal(activityElement); // Use the specific open function
                  else console.error("Could not find parent activity for 'Add Resource' button.");
             }
         });
     }
 
     // --- Add Resource Modal Listeners ---
-    if (closeModalHeaderBtn) closeModalHeaderBtn.addEventListener('click', closeModal);
-    if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
-    if (addResourceModal) addResourceModal.addEventListener('click', (event) => { if (event.target === addResourceModal) closeModal(); });
-    if (resourceListModal) {
-        resourceListModal.addEventListener('click', (event) => handleResourceSelection(event.target.closest('.resource-item')));
-        // Basic keydown listener (add more features like arrow keys if needed)
-        resourceListModal.addEventListener('keydown', (event) => {
+    if (closeModalHeaderBtn) closeModalHeaderBtn.addEventListener('click', closeAddResourceModal);
+    if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeAddResourceModal);
+    if (addResourceModal) addResourceModal.addEventListener('click', (event) => { if (event.target === addResourceModal) closeAddResourceModal(); });
+    if (resourceListModalEl) { // Use renamed variable
+        resourceListModalEl.addEventListener('click', (event) => handleResourceSelection(event.target.closest('.resource-item')));
+        resourceListModalEl.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
                  if (document.activeElement && document.activeElement.matches('.resource-item')) {
                     event.preventDefault();
@@ -412,22 +539,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (resourceUrlInput) resourceUrlInput.addEventListener('input', handleUrlInputChange);
     if (resourceSearchInput) resourceSearchInput.addEventListener('input', filterResourceList);
-    // Listener for the 'ADD RESOURCE' button IN MODAL (Corrected)
-    if (addResourceBtn) {
-        addResourceBtn.addEventListener('click', () => {
+    if (addResourceBtnModal) { // Use renamed variable
+        addResourceBtnModal.addEventListener('click', () => {
             let resourceTitle = 'Unknown Resource';
-            if (selectedResourceId !== null) {
-                const selectedLiElement = resourceListModal.querySelector(`.resource-item[data-resource-id="${selectedResourceId}"]`);
+            if (selectedResourceId !== null && resourceListModalEl) { // Added null check
+                const selectedLiElement = resourceListModalEl.querySelector(`.resource-item[data-resource-id="${selectedResourceId}"]`);
                 if (selectedLiElement) {
                     const titleElement = selectedLiElement.querySelector('.min-w-0 p');
                     resourceTitle = titleElement ? titleElement.textContent.trim() : resourceTitle;
-                    addResourceToActivityList(resourceTitle); // Correct function
-                    closeModal();
-                } else { closeModal(); }
-            } else if (isValidUrl(resourceUrlInput?.value || '')) { // Added null check
+                    addResourceToActivityList(resourceTitle);
+                    closeAddResourceModal();
+                } else { closeAddResourceModal(); }
+            } else if (isValidUrl(resourceUrlInput?.value || '')) {
                 resourceTitle = resourceUrlInput.value.trim();
-                addResourceToActivityList(resourceTitle); // Correct function
-                closeModal();
+                addResourceToActivityList(resourceTitle);
+                closeAddResourceModal();
             } else { console.warn("Add resource button clicked, but no valid selection or URL found."); }
         });
     }
@@ -438,7 +564,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeEditEpisodeModalBtn) closeEditEpisodeModalBtn.addEventListener('click', closeEditEpisodeModal);
     if (editEpisodeModal) editEpisodeModal.addEventListener('click', (event) => { if (event.target === editEpisodeModal) closeEditEpisodeModal(); });
 
+    // --- Edit Learning Resource Modal Listeners (NEW) ---
+    if (editLearningResourceForm) editLearningResourceForm.addEventListener('submit', handleSaveLearningResourceChanges);
+    if (cancelEditLearningResourceBtn) cancelEditLearningResourceBtn.addEventListener('click', closeEditLearningResourceModal);
+    if (closeEditLearningResourceModalBtn) closeEditLearningResourceModalBtn.addEventListener('click', closeEditLearningResourceModal);
+    if (editLearningResourceModal) editLearningResourceModal.addEventListener('click', (event) => { if (event.target === editLearningResourceModal) closeEditLearningResourceModal(); });
+
+
     // --- Initial Setup ---
-    resetModalInputsAndSelection(); // Reset add resource modal state
+    resetAddResourceModalInputsAndSelection(); // Reset add resource modal state
 
 }); // End of DOMContentLoaded
