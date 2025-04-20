@@ -69,14 +69,14 @@
                                     <div>
                                         <label for="editEpisodeTitle" class="block text-sm font-medium text-gray-700">Title</label>
                                         <div class="mt-1">
-                                            <input type="text" name="editEpisodeTitle" id="editEpisodeTitle" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Episode Title">
+                                            <input type="text" name="editEpisodeTitle" id="editEpisodeTitle" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="Episode Title">
                                         </div>
                                     </div>
     
                                     <div>
                                         <label for="editEpisodeDescription" class="block text-sm font-medium text-gray-700">Description</label>
                                         <div class="mt-1">
-                                            <textarea name="editEpisodeDescription" id="editEpisodeDescription" rows="3" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Episode Description"></textarea>
+                                            <textarea name="editEpisodeDescription" id="editEpisodeDescription" rows="3" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder="Episode Description"></textarea>
                                         </div>
                                         <p class="mt-2 text-sm text-gray-500">Brief overview of the episode.</p>
                                     </div>
@@ -84,10 +84,17 @@
                                     <div>
                                         <label for="editEpisodeKnowbits" class="block text-sm font-medium text-gray-700">Knowbits</label>
                                         <div class="mt-1">
-                                            <select id="editEpisodeKnowbits" name="editEpisodeKnowbits" multiple class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-24">
-                                                <option value="kb1">Knowbit Example 1</option>
-                                                <option value="kb2">Knowbit Example 2</option>
-                                                <option value="kb3">Knowbit Example 3</option>
+                                            <select id="editEpisodeKnowbits" name="editEpisodeKnowbits" multiple class="block w-full px-3 py-1.5 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-24 text-gray-900 outline-1 -outline-offset-1 outline-gray-300">
+                                              <option value="algebraline murd">algebraline murd</option>
+                                              <option value="ühenimeline algebraline murd">ühenimeline algebraline murd</option>
+                                              <option value="kaksliige">kaksliige</option>
+                                              <option value="kolmliige">kolmliige</option>
+                                              <option value="harilik murd (II kooliastmest meenutada)">harilik murd (II kooliastmest meenutada)</option>
+                                              <option value="murru lugeja (II kooliastmest meenutada)">murru lugeja (II kooliastmest meenutada)</option>
+                                              <option value="murru nimetaja (II kooliastmest meenutada)">murru nimetaja (II kooliastmest meenutada)</option>
+                                              <option value="murru laiendaja (II kooliastmest meenutada)">murru laiendaja (II kooliastmest meenutada)</option>
+                                              <option value="suurim ühistegur (II kooliastmest meenutada)">suurim ühistegur (II kooliastmest meenutada)</option>
+                                              <option value="vähim ühiskordaja (II kooliastmest meenutada)">vähim ühiskordaja (II kooliastmest meenutada)</option>
                                             </select>
                                             <p class="mt-2 text-sm text-gray-500">Select relevant knowledge components.</p>
                                         </div>
@@ -96,10 +103,13 @@
                                     <div>
                                         <label for="editEpisodeSkillbits" class="block text-sm font-medium text-gray-700">Skillbits</label>
                                         <div class="mt-1">
-                                            <select id="editEpisodeSkillbits" name="editEpisodeSkillbits" multiple class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-24">
-                                                <option value="sb1">Skillbit Example A</option>
-                                                <option value="sb2">Skillbit Example B</option>
-                                                <option value="sb3">Skillbit Example C</option>
+                                            <select id="editEpisodeSkillbits" name="editEpisodeSkillbits" multiple class="block w-full px-3 py-1.5 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-24 text-gray-900 outline-1 -outline-offset-1 outline-gray-300">
+                                                <option value="korrutab ja jagab kaht algebralist murdu">korrutab ja jagab kaht algebralist murdu</option>
+                                                <option value="taandab algebralise murru">taandab algebralise murru</option>
+                                                <option value="laiendab algebralise murru">laiendab algebralise murru</option>
+                                                <option value="liidab ja lahutab kaht ühenimelist algebralist murdu (lihtsaim)">liidab ja lahutab kaht ühenimelist algebralist murdu (lihtsaim)</option>
+                                                <option value="liidab ja lahutab kaht algebralist murdu, mille nimetajas on kaksliige (keskmise keerukusega)">liidab ja lahutab kaht algebralist murdu, mille nimetajas on kaksliige (keskmise keerukusega)</option>
+                                                <option value="liidab ja lahutab kaht algebralist murdu, mille nimetajas on kolmliige (keerukaim)">liidab ja lahutab kaht algebralist murdu, mille nimetajas on kolmliige (keerukaim)</option>
                                             </select>
                                             <p class="mt-2 text-sm text-gray-500">Select relevant skills.</p>
                                         </div>
@@ -246,14 +256,20 @@
             </div>
         </div><div class="mt-6 border-t border-gray-900/10 pt-10">
             <h2 class="text-xl font-semibold leading-7 text-gray-900">Trajectory Episodes</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">Build the structure of your learning trajectory by adding episodes and learning activities.</p>
+            <p class="mt-1 text-sm leading-6 text-gray-600">Build the structure of your instructional trajectory by adding episodes and learning activities.</p>
 
             <div id="episodesContainer" class="mt-8 space-y-8">
 
                 <div class="bg-white ring-1 shadow-xs ring-gray-900/5 sm:rounded-xl p-6 episode-card border border-gray-200" data-episode-id="example1">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="text-lg font-semibold text-indigo-700">Episode 1: Example Introduction</h3> <p class="mt-1 text-sm text-gray-600">Description for the first example episode goes here.</p> </div>
+                            <h3 class="text-lg font-semibold text-indigo-700">Episode 1: Example Introduction</h3> 
+                            <p class="mt-1 text-sm text-gray-600">Description for the first example episode goes here.</p>
+                            <div class="mt-2 space-y-1">
+                              <div class="knowbits-display text-xs text-gray-500 italic"></div>
+                              <div class="skillbits-display text-xs text-gray-500 italic"></div>
+                          </div>
+                          </div>
                         <div class="flex-shrink-0 ml-4">
                             <button type="button" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 mr-3 edit-episode-btn">Edit</button>
                             <button type="button" class="text-sm font-medium text-red-600 hover:text-red-500 remove-episode-btn">Remove Episode</button>

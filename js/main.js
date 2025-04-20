@@ -177,10 +177,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentDescription = currentDescriptionElement ? currentDescriptionElement.textContent.trim() : '';
         // TODO: Retrieve saved knowbits/skillbits based on episodeId and set selected options
         // const savedKnowbits = episodeCardElement.dataset.knowbits ? JSON.parse(episodeCardElement.dataset.knowbits) : [];
-        // const savedSkillbits = episodeCardElement.dataset.skillbits ? JSON.parse(episodeCardElement.dataset.skillbits) : [];
+        // const savedSkillbits = episodeCardElement.dataset.skillbits ? JSON.parse(episodeCardElement.dataset.skillbits) : []; // TODO: uncomment when needed
 
         editingEpisodeIdInput.value = episodeId;
-        editEpisodeTitleInput.value = currentTitle;
+        editEpisodeTitleInput.value = currentTitle; 
         editEpisodeDescriptionInput.value = currentDescription;
 
         // Clear previous selections and select saved ones (example)
@@ -188,14 +188,14 @@ document.addEventListener('DOMContentLoaded', function() {
             Array.from(editEpisodeKnowbitsSelect.options).forEach(option => {
                 // option.selected = savedKnowbits.includes(option.value);
                  option.selected = false; // Resetting for now
-            });
+            }); 
         }
          if(editEpisodeSkillbitsSelect) { // Add null check
             Array.from(editEpisodeSkillbitsSelect.options).forEach(option => {
                 // option.selected = savedSkillbits.includes(option.value);
                 option.selected = false; // Resetting for now
             });
-         }
+         } 
 
 
         editEpisodeModal.classList.remove('hidden');
@@ -238,10 +238,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (titleElement) titleElement.textContent = newTitle || `Episode ${episodeId.split('-')[1]}`;
         if (descriptionElement) descriptionElement.textContent = newDescription;
-        // TODO: Store updated Knowbits/Skillbits (e.g., in data attributes or send to server)
-        // episodeCard.dataset.knowbits = JSON.stringify(selectedKnowbits);
-        // episodeCard.dataset.skillbits = JSON.stringify(selectedSkillbits);
 
+        // Update Knowbits/Skillbits display
+        const knowbitsDisplay = episodeCard.querySelector('.knowbits-display');
+        const skillbitsDisplay = episodeCard.querySelector('.skillbits-display');
+
+        if (knowbitsDisplay) {
+            knowbitsDisplay.textContent = selectedKnowbits.length > 0 ? `Knowbits: ${selectedKnowbits.join(', ')}` : '';
+        } else {
+            console.warn("Knowbits display element not found for episode:", episodeId);
+        }
+
+        if (skillbitsDisplay) {
+            skillbitsDisplay.textContent = selectedSkillbits.length > 0 ? `Skillbits: ${selectedSkillbits.join(', ')}` : '';
+        } else {
+            console.warn("Skillbits display element not found for episode:", episodeId);
+        }
+        
         closeEditEpisodeModal();
     }
 
@@ -276,30 +289,34 @@ document.addEventListener('DOMContentLoaded', function() {
         const episodeDiv = document.createElement('div');
         episodeDiv.className = 'bg-white ring-1 shadow-xs ring-gray-900/5 sm:rounded-xl p-6 episode-card border border-gray-200';
         episodeDiv.dataset.episodeId = newEpisodeId;
-        // TODO: Initialize data attributes for knowbits/skillbits if needed for editing
-        // episodeDiv.dataset.knowbits = '[]';
-        // episodeDiv.dataset.skillbits = '[]';
-
+        // Initialize data attributes for knowbits/skillbits
+        episodeDiv.dataset.knowbits = '[]';
+        episodeDiv.dataset.skillbits = '[]';
+        
         episodeDiv.innerHTML = `
             <div class="flex justify-between items-start mb-4">
-                <div>
-                    <h3 class="text-lg font-semibold text-indigo-700">New Episode ${newEpisodeId.split('-')[1]}</h3>
-                    <p class="mt-1 text-sm text-gray-600">Enter episode description...</p>
-                 </div>
-                <div class="flex-shrink-0 ml-4">
-                    <button type="button" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 mr-3 edit-episode-btn">Edit</button>
-                    <button type="button" class="text-sm font-medium text-red-600 hover:text-red-500 remove-episode-btn">Remove Episode</button>
+            <div>
+                <h3 class="text-lg font-semibold text-indigo-700">New Episode ${newEpisodeId.split('-')[1]}</h3>
+                <p class="mt-1 text-sm text-gray-600">Enter episode description...</p>
+                <div class="mt-2 space-y-1">
+                    <div class="knowbits-display text-xs text-gray-500 italic"></div>
+                    <div class="skillbits-display text-xs text-gray-500 italic"></div>
                 </div>
+                </div>
+            <div class="flex-shrink-0 ml-4">
+                <button type="button" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 mr-3 edit-episode-btn">Edit</button>
+                <button type="button" class="text-sm font-medium text-red-600 hover:text-red-500 remove-episode-btn">Remove Episode</button>
             </div>
-            <div class="mt-6 border-t border-gray-200 pt-6">
-                <h4 class="text-base font-semibold text-gray-800 mb-4">Learning Activities</h4>
-                <ul class="space-y-4 learning-activities-list"></ul>
-                 <button type="button" class="mt-4 inline-flex items-center rounded-md bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 add-activity-btn">
-                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" /></svg>
-                    Add Learning Activity
-                </button>
             </div>
-        `;
+        <div class="mt-6 border-t border-gray-200 pt-6">
+            <h4 class="text-base font-semibold text-gray-800 mb-4">Learning Activities</h4>
+            <ul class="space-y-4 learning-activities-list"></ul>
+             <button type="button" class="mt-4 inline-flex items-center rounded-md bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 add-activity-btn">
+                <svg class="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" /></svg>
+                Add Learning Activity
+            </button>
+        </div>
+    `;
         return episodeDiv;
     }
 
